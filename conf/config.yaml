@@ -1,0 +1,2 @@
+defaults:
+  - pipeline: iris.yaml

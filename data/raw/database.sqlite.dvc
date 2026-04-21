@@ -1,0 +1,5 @@
+outs:
+- md5: 9d958ebdd45a8c15e0366b21cac04198
+  size: 10240
+  hash: md5
+  path: database.sqlite

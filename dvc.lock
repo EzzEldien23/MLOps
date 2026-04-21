@@ -1,0 +1,96 @@
+schema: '2.0'
+stages:
+  process_data:
+    cmd: uv run python src/training/process_data.py
+    deps:
+    - path: data/raw/Iris.csv
+      hash: md5
+      md5: 717820ef0af287ff346c5cabfb4c612c
+      size: 5107
+    params:
+      params.yaml:
+        data.file_name: Iris
+        data.id_column: Id
+        data.processed_data_path: data/processed
+        data.random_state: 42
+        data.raw_data_path: data/raw
+        data.target_column: Species
+        data.test_size: 0.15
+    outs:
+    - path: data/processed/Iris-test.parquet
+      hash: md5
+      md5: 3f317913aef48622adcfccf85ec82251
+      size: 4804
+    - path: data/processed/Iris-train.parquet
+      hash: md5
+      md5: 9da50741e37217a61929acaa0c9ea2dc
+      size: 5896
+  train:
+    cmd: uv run python src/training/train.py
+    deps:
+    - path: data/processed/Iris-test.parquet
+      hash: md5
+      md5: 3f317913aef48622adcfccf85ec82251
+      size: 4804
+    - path: data/processed/Iris-train.parquet
+      hash: md5
+      md5: 9da50741e37217a61929acaa0c9ea2dc
+      size: 5896
+    params:
+      params.yaml:
+        model.file_name: Iris
+        model.model_name: fake
+        model.model_path: models
+        model.optimization_params.hyperparameter_search.random_state.max: 80
+        model.optimization_params.hyperparameter_search.random_state.min: 2
+        model.optimization_params.hyperparameter_search.random_state.name: random_state
+        model.optimization_params.hyperparameter_search.random_state.step: 1
+        model.optimization_params.hyperparameter_search.random_state.type: int
+        model.optimization_params.max_evals: 10
+        model.optimization_params.n_folds: 5
+        model.optimization_params.scoring: accuracy
+        model.processed_data_path: data/processed
+        model.repo_name: ITI-MLOps
+        model.target_column: Species
+        model.tracking_uri: https://dagshub.com/Ezzaldin97/ITI-MLOps.mlflow
+        model.trained_model_path: models/fake
+        model.use_mlflow: true
+    outs:
+    - path: models/fake/final_model.pkl
+      hash: md5
+      md5: 5b0c079ecdd13339ce452667e2a4fbfe
+      size: 5606
+    - path: models/fake/model_target_translator.pkl
+      hash: md5
+      md5: 25b84cdae415f85baa008bd3ffa57be1
+      size: 111
+  evaluate:
+    cmd: uv run python src/training/evaluate.py
+    deps:
+    - path: data/processed/Iris-test.parquet
+      hash: md5
+      md5: 3f317913aef48622adcfccf85ec82251
+      size: 4804
+    - path: models/fake/final_model.pkl
+      hash: md5
+      md5: 5b0c079ecdd13339ce452667e2a4fbfe
+      size: 5606
+    - path: models/fake/model_target_translator.pkl
+      hash: md5
+      md5: 25b84cdae415f85baa008bd3ffa57be1
+      size: 111
+    params:
+      params.yaml:
+        evaluate.file_name: Iris
+        evaluate.model_name: fake
+        evaluate.model_path: models
+        evaluate.processed_data_path: data/processed
+        evaluate.reports_path: reports
+        evaluate.target_column: Species
+        evaluate.tracking_uri: https://dagshub.com/Ezzaldin97/ITI-MLOps.mlflow
+        evaluate.trained_model_path: models/fake
+    outs:
+    - path: reports/fake/evaluation_report.json
+      hash: md5
+      md5: b0d975d02a5c8a7c4af339d8dcf45c69
+      size: 136

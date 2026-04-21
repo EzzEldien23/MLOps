@@ -1,0 +1,59 @@
+stages:
+  process_data:
+    cmd: uv run python src/training/process_data.py
+    deps:
+    - data/raw/Iris.csv
+    outs:
+    - data/processed/Iris-test.parquet
+    - data/processed/Iris-train.parquet
+    params:
+    - data.file_name
+    - data.id_column
+    - data.processed_data_path
+    - data.random_state
+    - data.raw_data_path
+    - data.target_column
+    - data.test_size
+  train:
+    cmd: uv run python src/training/train.py
+    deps:
+    - data/processed/Iris-test.parquet
+    - data/processed/Iris-train.parquet
+    outs:
+    - models/fake/final_model.pkl
+    - models/fake/model_target_translator.pkl
+    params:
+    - model.tracking_uri
+    - model.repo_name
+    - model.use_mlflow
+    - model.file_name
+    - model.model_name
+    - model.model_path
+    - model.optimization_params.hyperparameter_search.random_state.max
+    - model.optimization_params.hyperparameter_search.random_state.min
+    - model.optimization_params.hyperparameter_search.random_state.name
+    - model.optimization_params.hyperparameter_search.random_state.step
+    - model.optimization_params.hyperparameter_search.random_state.type
+    - model.optimization_params.max_evals
+    - model.optimization_params.n_folds
+    - model.optimization_params.scoring
+    - model.processed_data_path
+    - model.target_column
+    - model.trained_model_path
+  evaluate:
+    cmd: uv run python src/training/evaluate.py
+    deps:
+    - data/processed/Iris-test.parquet
+    - models/fake/final_model.pkl
+    - models/fake/model_target_translator.pkl
+    outs:
+    - reports/fake/evaluation_report.json
+    params:
+    - evaluate.tracking_uri
+    - evaluate.file_name
+    - evaluate.model_name
+    - evaluate.model_path
+    - evaluate.processed_data_path
+    - evaluate.reports_path
+    - evaluate.target_column
+    - evaluate.trained_model_path

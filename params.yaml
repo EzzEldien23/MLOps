@@ -1,0 +1,39 @@
+seed: 42
+data:
+  raw_data_path: data/raw
+  processed_data_path: data/processed
+  file_name: Iris
+  id_column: Id
+  target_column: Species
+  test_size: 0.15
+  random_state: 42
+model:
+  tracking_uri: https://dagshub.com/Ezzaldin97/ITI-MLOps.mlflow
+  repo_name: ITI-MLOps
+  use_mlflow: True
+  processed_data_path: data/processed
+  file_name: Iris
+  target_column: Species
+  model_name: fake
+  model_path: models
+  trained_model_path: models/fake
+  optimization_params:
+    n_folds: 5
+    max_evals: 10
+    scoring: accuracy
+    hyperparameter_search:
+      random_state:
+        name: random_state
+        type: int
+        min: 2
+        max: 80
+        step: 1
+evaluate:
+  tracking_uri: https://dagshub.com/Ezzaldin97/ITI-MLOps.mlflow
+  processed_data_path: data/processed
+  file_name: Iris
+  target_column: Species
+  model_name: fake
+  model_path: models
+  trained_model_path: models/fake
+  reports_path: reports
