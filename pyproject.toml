@@ -16,8 +16,10 @@ classifiers = [
     
 ]
 dependencies = [
+    "ipykernel>=7.2.0",
     "ipython",
     "jupyterlab",
+    "kagglehub>=1.0.0",
     "matplotlib",
     "notebook",
     "numpy",
@@ -26,6 +28,7 @@ dependencies = [
     "python-dotenv",
     "ruff",
     "scikit-learn",
+    "seaborn>=0.13.2",
 ]
 requires-python = "~=3.10.0"
 
