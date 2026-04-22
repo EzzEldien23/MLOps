@@ -1,6 +1,5 @@
 # Data
-# comment the following lines, let dvc manage artifacts
-#/data/
+/data/
 
 # Mac OS-specific storage files
 .DS_Store
@@ -90,7 +89,6 @@ target/
 
 # Jupyter Notebook
 .ipynb_checkpoints
-*.ipynb
 
 # IPython
 profile_default/
@@ -130,6 +128,11 @@ ipython_config.py
 .pdm.toml
 .pdm-python
 .pdm-build/
+
+# pixi
+#   pixi.lock should be committed to version control for reproducibility
+#   .pixi/ contains the environments and should not be committed
+.pixi/
 
 # PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
 __pypackages__/
@@ -186,24 +189,3 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
-
-# hydra outputs directory
-outputs/
-multirun/
-
-# pickle files of the model
-# comment the following lines, let dvc manage artifacts
-#*.pickle
-#*.pkl
-
-# training pipeline artifacts of evaluation
-# comment the following lines, let dvc manage artifacts
-#reports/*/*.json
-#reports/*/*.csv
-#reports/*/*.png
-#reports/*/*.pdf
-#reports/*/*.html
-#reports/*/*.txt
-
-# mlflow
-mlruns/
