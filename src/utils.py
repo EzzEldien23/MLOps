@@ -16,7 +16,6 @@ def load_data(
 
     print(" Loading data...")
 
-
     train_df = pd.read_csv(train_path)
 
     if TARGET not in train_df.columns:
@@ -29,16 +28,13 @@ def load_data(
 
     X_test = test_df.drop(columns=DROP_COLUMNS, errors="ignore")
 
- 
     submission_df = pd.read_csv(submission_path)
 
     if TARGET not in submission_df.columns:
         raise ValueError(" 'Survived' not found in submission file")
 
-  
     test_with_target = test_df.merge(submission_df, on="PassengerId", how="left")
     y_test = test_with_target[TARGET]
-
 
     if y_test.isnull().sum() > 0:
         raise ValueError(" Missing values in y_test after merge")

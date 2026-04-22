@@ -1,12 +1,11 @@
 import joblib
-
-from sklearn.pipeline import Pipeline
-from sklearn.metrics import accuracy_score
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+from sklearn.pipeline import Pipeline
 
-from src.utils import load_data
 from src.processing import get_preprocessing_pipeline
+from src.utils import load_data
 
 
 def train_and_evaluate(model, name, X_train, y_train, X_test, y_test):
@@ -14,10 +13,7 @@ def train_and_evaluate(model, name, X_train, y_train, X_test, y_test):
 
     preprocessor = get_preprocessing_pipeline()
 
-    clf = Pipeline([
-        ("preprocessor", preprocessor),
-        ("model", model)
-    ])
+    clf = Pipeline([("preprocessor", preprocessor), ("model", model)])
 
     clf.fit(X_train, y_train)
 
@@ -33,11 +29,9 @@ def main():
     print(" Loading data...")
     X_train, y_train, X_test, y_test = load_data()
 
-
     rf_model = RandomForestClassifier(n_estimators=100, random_state=42)
 
     lr_model = LogisticRegression(max_iter=300)
-
 
     rf_clf, rf_acc = train_and_evaluate(
         rf_model, "Random Forest", X_train, y_train, X_test, y_test
@@ -46,7 +40,6 @@ def main():
     lr_clf, lr_acc = train_and_evaluate(
         lr_model, "Logistic Regression", X_train, y_train, X_test, y_test
     )
-
 
     if rf_acc > lr_acc:
         best_model = rf_clf
