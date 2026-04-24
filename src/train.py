@@ -1,4 +1,7 @@
 import joblib
+import hydra
+from omegaconf import DictConfig
+
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
@@ -25,35 +28,30 @@ def train_and_evaluate(model, name, X_train, y_train, X_test, y_test):
     return clf, acc
 
 
-def main():
+@hydra.main(config_path="../config", config_name="conf", version_base=None)
+def main(cfg: DictConfig):
     print(" Loading data...")
     X_train, y_train, X_test, y_test = load_data()
 
-    rf_model = RandomForestClassifier(n_estimators=100, random_state=42)
+    if cfg.model.name == "random_forest":
+        model = RandomForestClassifier(**cfg.model.random_forest)
+        model_name = "Random Forest"
 
-    lr_model = LogisticRegression(max_iter=300)
+    elif cfg.model.name == "logistic_regression":
+        model = LogisticRegression(**cfg.model.logistic_regression)
+        model_name = "Logistic Regression"
 
-    rf_clf, rf_acc = train_and_evaluate(
-        rf_model, "Random Forest", X_train, y_train, X_test, y_test
-    )
-
-    lr_clf, lr_acc = train_and_evaluate(
-        lr_model, "Logistic Regression", X_train, y_train, X_test, y_test
-    )
-
-    if rf_acc > lr_acc:
-        best_model = rf_clf
-        best_name = "Random Forest"
-        best_acc = rf_acc
     else:
-        best_model = lr_clf
-        best_name = "Logistic Regression"
-        best_acc = lr_acc
+        raise ValueError("Unknown model!")
 
-    print(f"\n Best Model: {best_name} ({best_acc:.4f})")
+    clf, acc = train_and_evaluate(
+        model, model_name, X_train, y_train, X_test, y_test
+    )
 
-    joblib.dump(best_model, "best_model.joblib")
-    print(" Best model saved as best_model.joblib")
+    print(f"\n Final Model: {model_name} ({acc:.4f})")
+
+    joblib.dump(clf, cfg.output.model_path)
+    print(f" Model saved at {cfg.output.model_path}")
 
 
 if __name__ == "__main__":

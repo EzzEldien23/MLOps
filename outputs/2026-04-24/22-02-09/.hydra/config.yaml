@@ -1,0 +1,9 @@
+model:
+  name: random_forest
+  random_forest:
+    n_estimators: 100
+    random_state: 42
+  logistic_regression:
+    max_iter: 300
+output:
+  model_path: best_model.joblib
