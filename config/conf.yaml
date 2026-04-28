@@ -9,4 +9,4 @@ model:
     max_iter: 300
 
 output:
-  model_path: best_model.joblib
+  model_path: models\best_model.joblib

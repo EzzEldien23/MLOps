@@ -1,0 +1,8 @@
+stages:
+  train:
+    cmd: python src/train.py
+    deps:
+    - data/raw
+    - src
+    outs:
+    - models/model.joblib

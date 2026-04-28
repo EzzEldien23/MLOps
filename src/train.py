@@ -50,8 +50,8 @@ def main(cfg: DictConfig):
 
     print(f"\n Final Model: {model_name} ({acc:.4f})")
 
-    joblib.dump(clf, cfg.output.model_path)
-    print(f" Model saved at {cfg.output.model_path}")
+    joblib.dump(clf, 'models/model.joblib')
+    print(f" Model saved at {'models/model.joblib'}")
 
 
 if __name__ == "__main__":
