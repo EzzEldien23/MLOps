@@ -1,0 +1,16 @@
+creation_timestamp: 1781082013865
+current_stage: None
+deployment_job_state: null
+description: null
+last_updated_timestamp: 1781082013865
+model_id: m-95b2471e2e93409e93d48f9ee61602e7
+name: TitanicClassifier
+run_id: c96b9c08f2474a6c890a709f72bfa264
+run_link: null
+source: models:/m-95b2471e2e93409e93d48f9ee61602e7
+status: READY
+status_message: null
+storage_location: file:///D:/MLOps/mlruns/405545034181515635/models/m-95b2471e2e93409e93d48f9ee61602e7/artifacts
+user_id: null
+version: 3
+workspace: default

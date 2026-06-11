@@ -1,0 +1,9 @@
+artifact_location: file:///D:/MLOps/mlruns/405545034181515635
+creation_time: 1781081699445
+effective_trace_archival_retention: null
+experiment_id: '405545034181515635'
+last_update_time: 1781081699445
+lifecycle_stage: active
+name: Titanic-Classification
+trace_location: null
+workspace: default

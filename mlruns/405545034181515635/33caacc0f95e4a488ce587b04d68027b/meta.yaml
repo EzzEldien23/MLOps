@@ -1,0 +1,14 @@
+artifact_uri: file:///D:/MLOps/mlruns/405545034181515635/33caacc0f95e4a488ce587b04d68027b/artifacts
+end_time: 1781081802911
+entry_point_name: ''
+experiment_id: '405545034181515635'
+lifecycle_stage: active
+run_id: 33caacc0f95e4a488ce587b04d68027b
+run_name: trial_2
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1781081802714
+status: 3
+tags: []
+user_id: hp

@@ -33,6 +33,9 @@ dependencies = [
     "ruff",
     "scikit-learn",
     "seaborn>=0.13.2",
+    "optuna",
+    "mlflow>=3.13.0",
+    "dagshub>=0.7.0",
 ]
 requires-python = "~=3.10.0"
 

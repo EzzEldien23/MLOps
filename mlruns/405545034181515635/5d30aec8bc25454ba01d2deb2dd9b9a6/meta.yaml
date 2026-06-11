@@ -1,0 +1,14 @@
+artifact_uri: file:///D:/MLOps/mlruns/405545034181515635/5d30aec8bc25454ba01d2deb2dd9b9a6/artifacts
+end_time: 1781082357116
+entry_point_name: ''
+experiment_id: '405545034181515635'
+lifecycle_stage: active
+run_id: 5d30aec8bc25454ba01d2deb2dd9b9a6
+run_name: trial_8
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1781082356954
+status: 3
+tags: []
+user_id: ezzeldiennassar

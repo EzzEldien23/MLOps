@@ -1,0 +1,14 @@
+artifact_uri: file:///D:/MLOps/mlruns/405545034181515635/c96b9c08f2474a6c890a709f72bfa264/artifacts
+end_time: 1781081807004
+entry_point_name: ''
+experiment_id: '405545034181515635'
+lifecycle_stage: active
+run_id: c96b9c08f2474a6c890a709f72bfa264
+run_name: Logistic Regression (Tuned)_20260610_115633
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1781081794308
+status: 3
+tags: []
+user_id: hp
